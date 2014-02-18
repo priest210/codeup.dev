@@ -120,10 +120,22 @@ var_dump($_POST);
 <label for="q1d">
         <input type="radio" id="q1d" name=q1 value="purple">Purple>
 
-<br>
+        <!-- Question 3 -->
+<p>Which of these states have you visited?</p>
+
+<label for="texas"><input type="checkbox" id="texas" name="states[]" value="texas"> Texas</label>
+
+<label for="florida"><input type="checkbox" id="florida" name="states[]" value="florida"> Florida</label>
+
+<label for="california"><input type="checkbox" id="california" name="states[]" value="california"> California</label>
+
+<label for="kentucky"><input type="checkbox" id="kentucky" name="states[]" value="kentucky"> Kentucky</label>
 
 
 </form>
+
+
+
 
 
 
