@@ -4,24 +4,58 @@
 
 
 <head>
-		<title>My First HTML Form</title>
+		<title>My First HTML Form (Email)</title>
 </head>
 	
 	<body>
+        <h1>User Login</h1>
 
-		<form method="POST" action="http://requestb.in/zih7kmzi">
+            <form method="POST" action="http://requestb.in/zih7kmzi">
     <p>
         <label for="username">Username</label>
         <input id="username" name="username" type="text" placeholder = "Username">
     </p>
+    
     <p>
         <label for="password">Password</label>
         <input id="password" name="password" type="password" placeholder = Password>
     </p>
+    
     <p>
         <button type="submit">Click It!</button>
         <!-- <input name="submit"type="submit" value = "Push it!"> -->
     </p>
+
+
+
+        <h1>Compose an Email</h1>
+
+		
+        <form method="POST" action="http://requestb.in/zih7kmzi">
+    
+    <p>
+        <label for="to">From:</label>
+        <input id="to" name="to" type="text" placeholder = "Recepient's address">
+    </p>
+   
+    <p>
+        <label for="from">To:</label>
+        <input id="from" name="from" type="text" placeholder = "Sender's address">
+    </p>
+
+    <p>
+        <label for="subject">Subject:</label>
+        <input id="subject" name="subject" type="text" placeholder = "About?">
+    </p>
+
+    <p>
+    <textarea id="email_body" name="email_body" placeholder="Type message here"></textarea>
+    </p>
+    
+    <p>
+        <button type="submit">Send</button>
+    </p>
+
 </form>
 
 </body>
