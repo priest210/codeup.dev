@@ -86,19 +86,19 @@ var_dump($_POST);
 <form>
 
 <label for="q1a">
-        <input type="radio" id="q1a" name=q1 value="football">Football>
+        <input type="radio" id="q1a" name=q1 value="football">Football
 </label>
 
 <label for="q1b">
-        <input type="radio" id="q1b" name=q1 value="baseball">Baseball>
+        <input type="radio" id="q1b" name=q1 value="baseball">Baseball
 </label>
 
 <label for="q1c">
-        <input type="radio" id="q1c" name=q1 value="basketball">Basketball>
+        <input type="radio" id="q1c" name=q1 value="basketball">Basketball
 </label>
 
 <label for="q1d">
-        <input type="radio" id="q1d" name=q1 value="hockey">Hockey>
+        <input type="radio" id="q1d" name=q1 value="hockey">Hockey
 </label>
 
   <!-- Question 2 -->
@@ -106,19 +106,19 @@ var_dump($_POST);
 <p>What is your favorite color?</p>
 
 <label for="q1a">
-        <input type="radio" id="q1a" name=q1 value="red">Red>
+        <input type="radio" id="q1a" name=q1 value="red">Red
 </label>
 
 <label for="q1b">
-        <input type="radio" id="q1b" name=q1 value="orange">Orange>
+        <input type="radio" id="q1b" name=q1 value="orange">Orange
 </label>
 
 <label for="q1c">
-        <input type="radio" id="q1c" name=q1 value="yellow">Yellow>
+        <input type="radio" id="q1c" name=q1 value="yellow">Yellow
 </label>
 
 <label for="q1d">
-        <input type="radio" id="q1d" name=q1 value="purple">Purple>
+        <input type="radio" id="q1d" name=q1 value="purple">Purple
 
         <!-- Question 3 -->
 <p>Which of these states have you visited?</p>
@@ -132,7 +132,24 @@ var_dump($_POST);
 <label for="kentucky"><input type="checkbox" id="kentucky" name="states[]" value="kentucky"> Kentucky</label>
 
 
+
+<p><h1>Select Testing</h1></p>
+
+
+
+    <label for="cheeseburgers">Do you like cheeseburgers? </label>
+    <select id="cheeseburgers" name="cheeseburgers">
+        <option>Yes</option>
+        <option selected>No</option>
+    </select>
+
+
+    <p>
+        <button type="submit">Submit</button>
+    </p>
+
 </form>
+
 
 
 
