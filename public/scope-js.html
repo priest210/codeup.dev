@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<head>
+    <title>scope</title>
+</head>
+<body>
+
+	<h1>Scope (218)</h1>
+	
+    <script>
+ 
+
+var myNameIs = 'Bob';
+
+(function sayHello(name) {
+
+	console.log('Hello ' + name);
+
+	return;
+
+}(myNameIs));
+
+	
+
+var random = Math.floor((Math.random()*100)+1);
+
+(function isOdd(number) {
+
+
+	(number % 2 != 0) ? console.log(number + ' is odd') : console.log(number + ' is even');
+
+	return;
+
+}(random));
+
+
+
+
+
+    </script>
+</body>
+</html>
