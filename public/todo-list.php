@@ -21,44 +21,20 @@
 
 <?php
 
-// Create an array from your sample todo list items in the template.
-
 $todo = array('Study PHP',
               'Study HTML',
               'Study PHP some more',
               'Master PHP');
 
-// use PHP to display the array items within the unordered list 
-// in your template and test in your browser.
+// $todo = 
 
- foreach ($todo as $item) {   
-  
+// $saved_array = 
+
+foreach ($todo as $key => $item) {  
+
         var_dump($item);
 
 }
-
-
-// Reference the code you wrote in your command line todo list 
-// app to add the ability to load todo items from a file.
-
-// The items should be loaded into an array, and 
-// then that array should be used to display the items just as in the above steps.
-
-function get_input($upper = FALSE) {
-
-    $input = trim(fgets(STDIN));
-    
-    if ($upper === TRUE) {
-        
-        return strtoupper($input);        
-    }
-    else {
-            
-        return $input;
-    }
-
-}
-
 
 function read_file($filename) {
 
@@ -66,11 +42,12 @@ function read_file($filename) {
 
         $contents_array = fread($handle, filesize($filename));
 
+        $saved_array = explode("\n", $contents_array);
+
         fclose($handle);
 
-        print_r(explode("\n", $contents_array));
-
-
+        return $saved_array;
+}
 
 function save_file($filename, $contents_array) {
 
@@ -81,25 +58,136 @@ function save_file($filename, $contents_array) {
         fwrite($handle, $new_save);
 
         fclose($handle);
+}
 
-        echo 'Save was successful.' . "PHP_EOL";
+// Using the POST method on the form in your template, 
+// create the ability to add todo items to the list. 
+
+
+
+// Each time an item is added, the todo list file should be saved 
+// with the new item added.
+
+
+
+// need to take uploaded file from form and put in array
+
+
+// if (isset($_POST['newitem']) && !empty {  )
+
+    # code...
+// }
+
+// Add a link next to each todo item that says "Mark Complete" and 
+
+// have it send a GET request to the page that deletes the entry. 
+
+// Use query strings to send the proper key back to the server, and 
+// update the todo list file to reflect the deletion.
+
+
+if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
+
+
+    // if ($FILES['new_upload']['error'] ==   {
+
+    //     $errormessage = 'File upload error. ';
+    // }
+
+    // if ($FILES['new_upload']['type'] == 'text/plain') {
+
+    //     $errormessage = 'File upload type error. ';
+    // }
+ 
+    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+    
+    $filename = basename($_FILES['new_upload']['name']);
+    
+    $saved_filename = $upload_dir . $filename;
+    
+    move_uploaded_file($_FILES['new_upload']['tmp_name'], $saved_filename);
+
+    // $uploadedItems = read_file($saved_filename);
+    
+    // $todos = array_merge($todo, $uploadedItems);
+
+    // save_file($filename, $items);
+
+}
+
+if (isset($saved_filename)) {
+
+    echo "<p>You can download your file <a href='/uploads/{$filename}'>here</a>.</p>";
+}
+
+if (isset($_POST['newitem'])) {
+
+    $item = $_POST['newitem'];
+    
+    array_push($items, $item);
+
+    save_file($filename, $items);
+   
+}
+
+if (isset($_GET ['remove'])) {
+
+    $itemId = $_GET['remove'];
+
+    unset($items[$itmeId]);
+
+    save_file($filename, $items);
+   
+}
+
+
 
 
 ?>
 
-		
+
 <form method="POST" action="">
     <p>
         <label for="New Item">Add item:</label>
-        <input id="New Item" name="New Item" type="text" autotfocus = "autofocus" placeholder="Enter new TODO item">
+        <input id="New Item" name="New Item" type="text" autotfocus = "autofocus" placeholder="Enter New TODO Item">
     </p>
 
     <p>
         <input type="submit" value="Add item">
     </p>
 
+</form>
+
+
+<h1>Upload File</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    
+    <p>
+        <label for="new_upload">File to upload: </label>
+        <input type="file" id="new_upload" name="new_upload" placeholder="Browse to file">
+    </p>
+    <p>
+        <input type="submit" value="Upload">
+
+    </p>
 
 </form>
 
+<?php 
+echo "GET:";
+
+var_dump($_GET);
+
+echo "POST";
+
+var_dump($_GET);
+
+echo "FILES";
+
+var_dump($_FILES);
+
+
+ ?>
 </body>
 </html>
