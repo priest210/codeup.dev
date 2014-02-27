@@ -1,23 +1,40 @@
 <?php
 
+$ads = new AddressDataStore();
+$contacts = $ads->read_address_book();
+$writes = $ads->write_address_book();
+$addItem = $ads->array_push();
+
 class AddressDataStore {
 
     public $filename = '';
 
-    function read_address_book() {
-        $contacts = [];
-        $handle = fopen($this->$filename, 'r');
-        while (($data = fgetcsv($handle)) !=FALSE) {			
-        	$contacts [] = $data;
-        }
-        fclose($handle);
-        return $contacts;
+    function __construct($filename = 'address_list.csv') {
+        	$this->filename = $filename;
     }
 
+    function read_address_book() {
+    	$filesize = filesize($filename);
+        $handle = fopen($this->$filename, 'r');
 
+    	if ($filesize > 0) {					
+			$contacts = [];
+
+			while (($data = fgetcsv($handle) != FALSE)) {	
+    		array_push($contacts, $data);
+			}
+	
+		}else {
+ 		$contacts = [];
+    	} 
+    
+    	fclose($handle);
+    	return $contacts;
+
+	}
 
     function write_address_book($addresses_array) {
-    	$handle = fopen($this => $filename, 'w');
+    	$handle = fopen($this -> $filename, 'w');
     	foreach ($rows as $row ) {
     		$write = fputcsv($handle, $row);
     	}
@@ -25,42 +42,36 @@ class AddressDataStore {
     	return $writes;
     }
 
-    function __construct($filename = 'address_list.csv') {
-        	$this->filename = $filename;
-    }
+    function addItem($address_book, &$errorMessage) {
+	$newitem = $_POST;
+
+	if ($newitem['name'] == '' || $newitem['streetaddress'] == '' || $newitem['city'] == '' || $newitem['state'] == '' || $newitem['zip'] == '') {
+		$errorMessage = 'Please enter required information';
+	} else {
+		array_push($address_book, $newitem);
+	}
 
 }
-
-
-$ads = new AddressDataStore();
-$contacts = $ads->read_address_book();
-$writes = $ads->write_address_book();
-
-
-
 
 
 $errorMessage = '';
 $filename = 'address_list.csv';
 read_file($filename);
 
+
 // Read a file from the directory
 function read_file($filename) {
-
 	$filesize = filesize($filename);
 	$handle = fopen($filename, 'r');
 
 	if ($filesize > 0) {					
-
 		$contacts = [];
 
-		while (($data = fgetcsv($handle) !== FALSE)) {
-			
+		while (($data = fgetcsv($handle) !== FALSE)) {	
     		array_push($contacts, $data);
 		}
-	}
-    
-    else {
+	
+	}else {
  		$contacts = [];
     } 
     
@@ -98,13 +109,6 @@ $address_book = [
 writeCSV($filename, $address_book);
 
 
-// $items = read_file($filename);
-
-
-// $thelist = 'data/address_list.csv';
-// $address_list = 'address_list.csv';
-
-
 
 // if new item is posted this code runs
 if (!empty($_POST['name'])) {
@@ -114,14 +118,49 @@ if (!empty($_POST['name'])) {
 }
 
 writeCSV($filename, $address_book);
-// if (!empty($_POST['name'])) {
 
-// 		$name = $_POST {'name'};
-// 		$streetaddress = $_POST {'streetaddress'};
-// 		$city = $_POST {'city'};
-// 		$state = $_POST {'state'};
-// 		$zip = $_POST {'zip'};
-// 		$phone = $_POST {'phone'};
+
+$entry = [$name, $streetaddress, $city, $state, $zip];
+
+$error = false;
+$message = '';
+
+if (empty($name)) {
+	array_push($errorMessage, 'name must have a value');
+}
+
+if (empty($streetaddress)) {
+	array_push($errorMessage, 'street address must have a value');
+}
+
+if (empty($city)) {
+	array_push($errorMessage, 'city must have a value');
+}
+
+if (empty($state)) {
+	array_push($errorMessage, 'state must have a value');
+}
+
+if (empty($zip)) {
+	array_push($errorMessage, 'zip must have a value');
+}
+
+if (!empty($_POST['name'])) {
+		$entry = [];
+		$entry[$name] = $_POST {'name'};
+		$entry[$streetaddress] = $_POST {'streetaddress'};
+		$entry[$city] = $_POST {'city'};
+		$entry[$state] = $_POST {'state'};
+		$entry[$zip] = $_POST {'zip'};
+		$entry[$phone] = $_POST {'phone'};
+
+		foreach ($entry as $key => $value) {
+			if ($empty($value)) {
+				array_push($errorMessage, '$key must have a value');
+			}
+		}
+
+
 
 ?>
 
