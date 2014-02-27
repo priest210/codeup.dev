@@ -25,15 +25,19 @@ class AddressDataStore {
     	return $writes;
     }
 
-
+    function __construct($filename = 'address_list.csv') {
+        	$this->filename = $filename;
+    }
 
 }
 
 
 $ads = new AddressDataStore();
-$ads->filename = 'address_list.csv';
 $contacts = $ads->read_address_book();
 $writes = $ads->write_address_book();
+
+
+
 
 
 $errorMessage = '';
