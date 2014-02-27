@@ -4,80 +4,51 @@
 
 // Read a file from the directory
 function read_file($filename) {
-
     $filesize = filesize($filename);
-
     if ($filesize > 0) {
-
         $handle = fopen($filename, 'r');
-
         $content_string = fread($handle, $filesize);
-
         $saved_array = explode("\n", trim($content_string));
-
         fclose($handle);
-
-        
+    
     } else {
         $saved_array = [];
     }
-
     return $saved_array;
 
 }
 
 // Saves an array to file name that I send
 function save_file($filename, $contents_array) {
-
     $new_save = implode("\n", $contents_array);
-
     $handle = fopen($filename, 'w');
-
     fwrite($handle, $new_save);
-
     fclose($handle);
 }
 
-// sets the filename
+// set the filename path variable
 $filename = 'data/todo_list.txt';
 
-
-// Read file contents
-
-
+// calls the real function for file with new todo item add to end of array
 $items = read_file($filename);
 
-// if new item is posted this code runs
+// if new item is posted this code adds to end of array. Saves file
 if (isset($_POST['newitem']) && (!empty($_POST['newitem']))) {
-
     $item = htmlspecialchars(strip_tags($_POST['newitem']));
-
-    // $item = $_POST['newitem'];
-    
     array_push($items, $item);
-
     save_file($filename, $items);
-
-    header('Location: todo-list.php');
-   
+    header('Location: todo-list.php');  
 }
-// removes item from array
+
+// if GET is initiated, removes item from array.  Saves file
 if (isset($_GET['remove'])) {
-
     $itemId = $_GET['remove'];
-
     unset($items[$itemId]);
-
     save_file($filename, $items);
-
-    header('Location: todo-list.php');
-   
+    header('Location: todo-list.php');   
 }
 
-// need to make fread ($filename) readable when empty
-// getting parameter length needs to be greater than 0
-
-// covers all files
+// if file contains something & has no errors
 if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
 
 // covers just $filename
@@ -87,31 +58,21 @@ if (count($filename) == 0) {
 }
 
     if ($_FILES['new_upload']['error'] == 0)  {
-
         $errormessage = 'File upload error. ';
     }
-
     if ($_FILES['new_upload']['type'] == 'text/plain') {
-
         $errormessage = 'File upload type error. ';
     }
  
-    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
-    
-    $userfilename = basename($_FILES['new_upload']['name']);
-    
+    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';   
+    $userfilename = basename($_FILES['new_upload']['name']);   
     $saved_filename = $upload_dir . $userfilename;
 
     if ($_FILES['new_upload']['type'] == 'text/plain') {
-        # code...
     move_uploaded_file($_FILES['new_upload']['tmp_name'], $saved_filename);
-
     $uploadedItems = read_file($saved_filename);
- 
     $items = array_merge($items, $uploadedItems);
-
     save_file($filename, $items);
-
     var_dump($_FILES['new_upload']['type']);
 
     } else {
@@ -120,8 +81,8 @@ if (count($filename) == 0) {
     
 }
 
+// if file has items saved to it.  User can retrieve at this link posted. 
 if (isset($saved_filename)) {
-
     echo "<p>You can download your file <a href='/uploads/{$filename}'>here</a>.</p>";
 }
 
@@ -176,17 +137,7 @@ if (isset($saved_filename)) {
 </form>
 
 <?php 
-// echo "GET:";
 
-// var_dump($_GET);
-
-// echo "POST";
-
-// var_dump($_GET);
-
-// echo "FILES";
-
-// var_dump($_FILES);
 
 
  ?>
