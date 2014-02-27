@@ -1,23 +1,62 @@
 <?php
 
+class AddressDataStore {
+
+    public $filename = '';
+
+    function read_address_book() {
+        $contacts = [];
+        $handle = fopen($this->$filename, 'r');
+        while (($data = fgetcsv($handle)) !=FALSE) {			
+        	$contacts [] = $data;
+        }
+        fclose($handle);
+        return $contacts;
+    }
+
+
+
+    function write_address_book($addresses_array) {
+    	$handle = fopen($this => $filename, 'w');
+    	foreach ($rows as $row ) {
+    		$write = fputcsv($handle, $row);
+    	}
+    	fclose($handle);
+    	return $writes;
+    }
+
+
+
+}
+
+
+$ads = new AddressDataStore();
+$ads->filename = 'address_list.csv';
+$contacts = $ads->read_address_book();
+$writes = $ads->write_address_book();
+
+
+$errorMessage = '';
+$filename = 'address_list.csv';
+read_file($filename);
+
 // Read a file from the directory
 function read_file($filename) {
 
 	$filesize = filesize($filename);
-	echo $filesize;
+	$handle = fopen($filename, 'r');
 
 	if ($filesize > 0) {					
 
-		$handle = fopen($filename, 'r');
+		$contacts = [];
 
-    	$contacts = fgetcsv($handle, filesize);
-
-    	$contacts = explode("\n", $contacts);
-
+		while (($data = fgetcsv($handle) !== FALSE)) {
+			
+    		array_push($contacts, $data);
+		}
 	}
     
     else {
-
  		$contacts = [];
     } 
     
@@ -25,32 +64,25 @@ function read_file($filename) {
     return $contacts;
 }
 
-$filename = 'data/todo_list.txt';
-read_file($filename);
-
-
-// Saves an array to file name that I send
-function save_file($filename, $contacts) {
-
-    $handle = fopen($filename, 'w');
-
-    fwrite($handle, $contacts);
-
-    fclose($handle);
-}
-
 
 function writeCSV($filename, $rows) {
-	
 	$handle = fopen($filename, "w");
-	
-	foreach ($address_list as $rows) {
-
+	foreach ($rows as $row) {
+		fputcsv($handle, $row);
 	}
-		
-	fputcsv($handle, $rows);
 
 	fclose($handle);
+}
+
+function addItem($address_book, &$errorMessage) {
+	$newitem = $_POST;
+
+	if ($newitem['name'] == '' || $newitem['streetaddress'] == '' || $newitem['city'] == '' || $newitem['state'] == '' || $newitem['zip'] == '') {
+		$errorMessage = 'Please enter required information';
+	} else {
+		array_push($address_book, $newitem);
+	}
+
 }
 
 $address_book = [
@@ -59,32 +91,25 @@ $address_book = [
     ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
 ];
 
-writeCSV('address_book.csv', $address_book);
+writeCSV($filename, $address_book);
 
 
 // $items = read_file($filename);
 
-$newitem = [];
 
-$thelist = 'data/address_list.csv';
-
-$address_list = 'address_list.csv';
+// $thelist = 'data/address_list.csv';
+// $address_list = 'address_list.csv';
 
 
 
 // if new item is posted this code runs
 if (!empty($_POST['name'])) {
-
-	foreach($_POST as $key => $items) {
-	
+	foreach($_POST as $key => $items) {	
 		$newitem[] = htmlspecialchars(strip_tags($items));
-	
 	}
-
-	save_file($thelist, $address_list);
 }
 
-
+writeCSV($filename, $address_book);
 // if (!empty($_POST['name'])) {
 
 // 		$name = $_POST {'name'};
@@ -117,7 +142,7 @@ if (!empty($_POST['name'])) {
 				<td>name </td>
 				<td>streetaddress </td>
 				<td>city </td>
-				<td>state </td>
+		 		<td>state </td>
 				<td>zip </td>
 				<td>phone </td>
 			</tr>
