@@ -3,49 +3,96 @@
 // Read a file from the directory
 function read_file($filename) {
 
-    $handle = fopen($filename, 'r');
+	$filesize = filesize($filename);
+	echo $filesize;
 
-    $contact_string = fread($handle, filesize($filename));
+	if ($filesize > 0) {					
 
-    $contact_array = explode("\n", $contact_string);
+		$handle = fopen($filename, 'r');
 
+    	$contacts = fgetcsv($handle, filesize);
+
+    	$contacts = explode("\n", $contacts);
+
+	}
+    
+    else {
+
+ 		$contacts = [];
+    } 
+    
     fclose($handle);
-
-    return $contact_array;
+    return $contacts;
 }
 
-// Saves an array to file name that I send
-function save_file($filename, $contact_array) {
+$filename = 'data/todo_list.txt';
+read_file($filename);
 
-    $new_save = implode("\n", $contact_array);
+
+// Saves an array to file name that I send
+function save_file($filename, $contacts) {
 
     $handle = fopen($filename, 'w');
 
-    fwrite($handle, $new_save);
+    fwrite($handle, $contacts);
 
     fclose($handle);
 }
 
 
+function writeCSV($filename, $rows) {
+	
+	$handle = fopen($filename, "w");
+	
+	foreach ($address_list as $rows) {
 
-foreach ($variable as $key => $value) {
-	fputcsv(handle, fields)
+	}
+		
+	fputcsv($handle, $rows);
+
+	fclose($handle);
 }
 
-$filename = 'data/address_list.csv';
+$address_book = [
+    ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
+    ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
+    ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
+];
 
-// Read file contents
-$items = read_file($filename);
+writeCSV('address_book.csv', $address_book);
+
+
+// $items = read_file($filename);
+
+$newitem = [];
+
+$thelist = 'data/address_list.csv';
+
+$address_list = 'address_list.csv';
+
+
 
 // if new item is posted this code runs
 if (!empty($_POST['name'])) {
 
-    $item = htmlspecialchars(strip_tags($_POST['name']));
+	foreach($_POST as $key => $items) {
+	
+		$newitem[] = htmlspecialchars(strip_tags($items));
+	
+	}
 
-    array_push($items, $item);
-
-    save_file($filename, $items);
+	save_file($thelist, $address_list);
 }
+
+
+// if (!empty($_POST['name'])) {
+
+// 		$name = $_POST {'name'};
+// 		$streetaddress = $_POST {'streetaddress'};
+// 		$city = $_POST {'city'};
+// 		$state = $_POST {'state'};
+// 		$zip = $_POST {'zip'};
+// 		$phone = $_POST {'phone'};
 
 ?>
 
@@ -58,8 +105,27 @@ if (!empty($_POST['name'])) {
 </head>
 	
 	<body>
+		
+		
+
+		<!-- <table>
+			
+		
+			<?// foreach($items as $item): ?>
+            
+			<tr> foreach()
+				<td>name </td>
+				<td>streetaddress </td>
+				<td>city </td>
+				<td>state </td>
+				<td>zip </td>
+				<td>phone </td>
+			</tr>
+
+			<?// endforeach; ?>
+
+		</table> -->
         
-     <h1>Address Book</h1>
 
        <h1>Add Contact to your Address Book</h1>
 
