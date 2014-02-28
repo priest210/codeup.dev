@@ -2,20 +2,22 @@
 
 $ads = new AddressDataStore();
 $contacts = $ads->read_address_book();
-$writes = $ads->write_address_book();
-$addItem = $ads->array_push();
+$ads->write_address_book($contacts);
+
+$errorMessage = '';
+// read_file($filename);
 
 class AddressDataStore {
 
-    public $filename = '';
+    public $filename = 'address_list.csv';
 
-    function __construct($filename = 'address_list.csv') {
+    public function __construct($filename = 'address_list.csv') {
         	$this->filename = $filename;
     }
 
-    function read_address_book() {
-    	$filesize = filesize($filename);
-        $handle = fopen($this->$filename, 'r');
+    public function read_address_book() {
+    	$filesize = filesize($this->filename);
+        $handle = fopen($this->filename, 'r');
 
     	if ($filesize > 0) {					
 			$contacts = [];
@@ -25,7 +27,8 @@ class AddressDataStore {
 			}
 	
 		}else {
- 		$contacts = [];
+ 		
+ 			$contacts = [];
     	} 
     
     	fclose($handle);
@@ -33,72 +36,32 @@ class AddressDataStore {
 
 	}
 
-    function write_address_book($addresses_array) {
-    	$handle = fopen($this -> $filename, 'w');
-    	foreach ($rows as $row ) {
-    		$write = fputcsv($handle, $row);
+    public function write_address_book($addresses_array) {
+    	$handle = fopen($this->filename, 'w');
+    	foreach ($addresses_array as $row ) {
+    		fputcsv($handle, $row);
     	}
     	fclose($handle);
-    	return $writes;
     }
 
-    function addItem($address_book, &$errorMessage) {
-	$newitem = $_POST;
 
-	if ($newitem['name'] == '' || $newitem['streetaddress'] == '' || $newitem['city'] == '' || $newitem['state'] == '' || $newitem['zip'] == '') {
-		$errorMessage = 'Please enter required information';
-	} else {
-		array_push($address_book, $newitem);
-	}
+	// public function add_item($address_book, &$errorMessage) {
+	// 	$newitem = $_POST;
 
+	// 	if ($newitem['name'] == '' || $newitem['streetaddress'] == '' || $newitem['city'] == '' || $newitem['state'] == '' || $newitem['zip'] == '') {
+	// 		$errorMessage = 'Please enter required information';
+	// 	} else {
+	// 		array_push($address_book, $newitem);
+	// 	}
+	// }
 }
 
 
-$errorMessage = '';
-$filename = 'address_list.csv';
-read_file($filename);
 
 
-// Read a file from the directory
-function read_file($filename) {
-	$filesize = filesize($filename);
-	$handle = fopen($filename, 'r');
+// $filename = 'address_list.csv';
+// read_file($filename);
 
-	if ($filesize > 0) {					
-		$contacts = [];
-
-		while (($data = fgetcsv($handle) !== FALSE)) {	
-    		array_push($contacts, $data);
-		}
-	
-	}else {
- 		$contacts = [];
-    } 
-    
-    fclose($handle);
-    return $contacts;
-}
-
-
-function writeCSV($filename, $rows) {
-	$handle = fopen($filename, "w");
-	foreach ($rows as $row) {
-		fputcsv($handle, $row);
-	}
-
-	fclose($handle);
-}
-
-function addItem($address_book, &$errorMessage) {
-	$newitem = $_POST;
-
-	if ($newitem['name'] == '' || $newitem['streetaddress'] == '' || $newitem['city'] == '' || $newitem['state'] == '' || $newitem['zip'] == '') {
-		$errorMessage = 'Please enter required information';
-	} else {
-		array_push($address_book, $newitem);
-	}
-
-}
 
 $address_book = [
     ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
@@ -106,8 +69,7 @@ $address_book = [
     ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
 ];
 
-writeCSV($filename, $address_book);
-
+// write_address_book($filename, $address_book);
 
 
 // if new item is posted this code runs
@@ -117,48 +79,48 @@ if (!empty($_POST['name'])) {
 	}
 }
 
-writeCSV($filename, $address_book);
+// write_address_book($filename, $address_book);
 
 
-$entry = [$name, $streetaddress, $city, $state, $zip];
+// $entry = [$name, $streetaddress, $city, $state, $zip];
 
-$error = false;
-$message = '';
+// $error = false;
+// $message = '';
 
-if (empty($name)) {
-	array_push($errorMessage, 'name must have a value');
-}
+// if (empty($name)) {
+// 	array_push($errorMessage, 'name must have a value');
+// }
 
-if (empty($streetaddress)) {
-	array_push($errorMessage, 'street address must have a value');
-}
+// if (empty($streetaddress)) {
+// 	array_push($errorMessage, 'street address must have a value');
+// }
 
-if (empty($city)) {
-	array_push($errorMessage, 'city must have a value');
-}
+// if (empty($city)) {
+// 	array_push($errorMessage, 'city must have a value');
+// }
 
-if (empty($state)) {
-	array_push($errorMessage, 'state must have a value');
-}
+// if (empty($state)) {
+// 	array_push($errorMessage, 'state must have a value');
+// }
 
-if (empty($zip)) {
-	array_push($errorMessage, 'zip must have a value');
-}
+// if (empty($zip)) {
+// 	array_push($errorMessage, 'zip must have a value');
+// }
 
-if (!empty($_POST['name'])) {
-		$entry = [];
-		$entry[$name] = $_POST {'name'};
-		$entry[$streetaddress] = $_POST {'streetaddress'};
-		$entry[$city] = $_POST {'city'};
-		$entry[$state] = $_POST {'state'};
-		$entry[$zip] = $_POST {'zip'};
-		$entry[$phone] = $_POST {'phone'};
+// if (!empty($_POST['name'])) {
+// 		$entry = [];
+// 		$entry[$name] = $_POST {'name'};
+// 		$entry[$streetaddress] = $_POST {'streetaddress'};
+// 		$entry[$city] = $_POST {'city'};
+// 		$entry[$state] = $_POST {'state'};
+// 		$entry[$zip] = $_POST {'zip'};
+// 		$entry[$phone] = $_POST {'phone'};
 
-		foreach ($entry as $key => $value) {
-			if ($empty($value)) {
-				array_push($errorMessage, '$key must have a value');
-			}
-		}
+// 		foreach ($entry as $key => $value) {
+// 			if ($empty($value)) {
+// 				array_push($errorMessage, '$key must have a value');
+// 			}
+// 		}
 
 
 
@@ -238,4 +200,9 @@ if (!empty($_POST['name'])) {
 
 </body>
 </html>
+
+
+<?php
+
+
 
