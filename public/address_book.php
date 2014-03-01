@@ -1,67 +1,15 @@
 <?php
 
-$ads = new AddressDataStore();
-$contacts = $ads->read_address_book();
+require_once('address_data_store.php');
+class AddressBook extends AddressDataStore{
+	
+}
+
+$ads = new AddressDataStore('address_list.csv');
+$contacts = $ads->read_address_book('');
 $ads->write_address_book($contacts);
 
 $errorMessage = '';
-// read_file($filename);
-
-class AddressDataStore {
-
-    public $filename = 'address_list.csv';
-
-    public function __construct($filename = 'address_list.csv') {
-        	$this->filename = $filename;
-    }
-
-    public function read_address_book() {
-    	$filesize = filesize($this->filename);
-        $handle = fopen($this->filename, 'r');
-
-    	if ($filesize > 0) {					
-			$contacts = [];
-
-			while (($data = fgetcsv($handle) != FALSE)) {	
-    		array_push($contacts, $data);
-			}
-	
-		}else {
- 		
- 			$contacts = [];
-    	} 
-    
-    	fclose($handle);
-    	return $contacts;
-
-	}
-
-    public function write_address_book($addresses_array) {
-    	$handle = fopen($this->filename, 'w');
-    	foreach ($addresses_array as $row ) {
-    		fputcsv($handle, $row);
-    	}
-    	fclose($handle);
-    }
-
-
-	// public function add_item($address_book, &$errorMessage) {
-	// 	$newitem = $_POST;
-
-	// 	if ($newitem['name'] == '' || $newitem['streetaddress'] == '' || $newitem['city'] == '' || $newitem['state'] == '' || $newitem['zip'] == '') {
-	// 		$errorMessage = 'Please enter required information';
-	// 	} else {
-	// 		array_push($address_book, $newitem);
-	// 	}
-	// }
-}
-
-
-
-
-// $filename = 'address_list.csv';
-// read_file($filename);
-
 
 $address_book = [
     ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
@@ -69,7 +17,11 @@ $address_book = [
     ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
 ];
 
-// write_address_book($filename, $address_book);
+// write_address_book($filename);
+
+// if )isset($_GET ['remove'])) {
+// 	$todo_list->remove_item($_GET['remove'], 'address_list.csv');
+// }
 
 
 // if new item is posted this code runs
@@ -77,7 +29,21 @@ if (!empty($_POST['name'])) {
 	foreach($_POST as $key => $items) {	
 		$newitem[] = htmlspecialchars(strip_tags($items));
 	}
+
+	// push into $address_book
+	// save CSV
 }
+
+/**
+ * TODO:
+ * 
+ * Display table
+ * Handle $_GET['remove']
+ * Add remove links to table
+ * Handle $_FILE upload (just replace addressbook data)
+ * Allow $_FILE upload to merge w/ existing data
+ * 
+ */
 
 // write_address_book($filename, $address_book);
 
@@ -200,9 +166,3 @@ if (!empty($_POST['name'])) {
 
 </body>
 </html>
-
-
-<?php
-
-
-
