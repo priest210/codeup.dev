@@ -1,42 +1,22 @@
 <?php
 
+require_once('filestore.php');
 
+class TodoList extends Filestore {
 
-// Read a file from the directory
-function read_file($filename) {
-    $filesize = filesize($filename);
-    if ($filesize > 0) {
-        $handle = fopen($filename, 'r');
-        $content_string = fread($handle, $filesize);
-        $saved_array = explode("\n", trim($content_string));
-        fclose($handle);
-    
-    } else {
-        $saved_array = [];
-    }
-    return $saved_array;
-
-}
-
-// Saves an array to file name that I send
-function save_file($filename, $contents_array) {
-    $new_save = implode("\n", $contents_array);
-    $handle = fopen($filename, 'w');
-    fwrite($handle, $new_save);
-    fclose($handle);
 }
 
 // set the filename path variable
-$filename = 'data/todo_list.txt';
+$todo = new TodoList('todo_list.txt');
 
 // calls the real function for file with new todo item add to end of array
-$items = read_file($filename);
+$items = $todo->read_lines();
 
 // if new item is posted this code adds to end of array. Saves file
 if (isset($_POST['newitem']) && (!empty($_POST['newitem']))) {
     $item = htmlspecialchars(strip_tags($_POST['newitem']));
     array_push($items, $item);
-    save_file($filename, $items);
+    $todo->save_file($items);
     header('Location: todo-list.php');  
 }
 
@@ -44,18 +24,12 @@ if (isset($_POST['newitem']) && (!empty($_POST['newitem']))) {
 if (isset($_GET['remove'])) {
     $itemId = $_GET['remove'];
     unset($items[$itemId]);
-    save_file($filename, $items);
+    $todo->save_file($items);
     header('Location: todo-list.php');   
 }
 
 // if file contains something & has no errors
-if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
-
-// covers just $filename
-
-if (count($filename) == 0) {
-    // code...
-}
+if (count($_FILES) > 0 && $_FILES['newitem']['error'] == 0) {
 
     if ($_FILES['new_upload']['error'] == 0)  {
         $errormessage = 'File upload error. ';
