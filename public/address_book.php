@@ -1,93 +1,53 @@
 <?php
 
 require_once('address_data_store.php');
-class AddressBook extends AddressDataStore{
-	
-}
 
-$ads = new AddressDataStore('address_list.csv');
-$contacts = $ads->read_address_book('');
-$ads->write_address_book($contacts);
+$addresses = new AddressDataStore('address_list.csv');
+$contacts = $addresses->read_address_book();
+$addresses->write_address_book($contacts);
 
-$errorMessage = '';
+$errorMessage = [];
 
-$address_book = [
-    ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
-    ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
-    ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
-];
-
-// write_address_book($filename);
-
-// if )isset($_GET ['remove'])) {
-// 	$todo_list->remove_item($_GET['remove'], 'address_list.csv');
-// }
+var_dump($contacts);
 
 
-// if new item is posted this code runs
 if (!empty($_POST['name'])) {
-	foreach($_POST as $key => $items) {	
-		$newitem[] = htmlspecialchars(strip_tags($items));
+	$newitem[] = htmlspecialchars(strip_tags($_POST['name']));
+}	else {
+		array_push($errorMessage, 'Name must have a value.');
 	}
+
+if (!empty($_POST['streetaddress'])) {
+	$newitem[] = htmlspecialchars(strip_tags($_POST['streetaddress']));
+}	else {
+		array_push($errorMessage, 'Street address must have a value.');
+	}
+
+if (!empty($_POST['city'])) {
+	$newitem[] = htmlspecialchars(strip_tags($_POST['city']));
+}	else {
+		array_push($errorMessage, 'City must have a value.');
+	}
+
+if (!empty($_POST['state'])) {
+	$newitem[] = htmlspecialchars(strip_tags($_POST['state']));
+}	else {
+		array_push($errorMessage, 'State must have a value.');
+	}
+
+if (!empty($_POST['zip'])) {
+	$newitem[] = htmlspecialchars(strip_tags($_POST['zip']));
+}	else {
+		array_push($errorMessage, 'Zip must have a value');
+	}
+
+// Need to take each $newitem from the if statements and push on the end of array
+
+array_push($contacts, $newitem);
+$addresses->write_address_book($contacts);
 
 	// push into $address_book
 	// save CSV
-}
-
-/**
- * TODO:
- * 
- * Display table
- * Handle $_GET['remove']
- * Add remove links to table
- * Handle $_FILE upload (just replace addressbook data)
- * Allow $_FILE upload to merge w/ existing data
- * 
- */
-
-// write_address_book($filename, $address_book);
-
-
-// $entry = [$name, $streetaddress, $city, $state, $zip];
-
-// $error = false;
-// $message = '';
-
-// if (empty($name)) {
-// 	array_push($errorMessage, 'name must have a value');
-// }
-
-// if (empty($streetaddress)) {
-// 	array_push($errorMessage, 'street address must have a value');
-// }
-
-// if (empty($city)) {
-// 	array_push($errorMessage, 'city must have a value');
-// }
-
-// if (empty($state)) {
-// 	array_push($errorMessage, 'state must have a value');
-// }
-
-// if (empty($zip)) {
-// 	array_push($errorMessage, 'zip must have a value');
-// }
-
-// if (!empty($_POST['name'])) {
-// 		$entry = [];
-// 		$entry[$name] = $_POST {'name'};
-// 		$entry[$streetaddress] = $_POST {'streetaddress'};
-// 		$entry[$city] = $_POST {'city'};
-// 		$entry[$state] = $_POST {'state'};
-// 		$entry[$zip] = $_POST {'zip'};
-// 		$entry[$phone] = $_POST {'phone'};
-
-// 		foreach ($entry as $key => $value) {
-// 			if ($empty($value)) {
-// 				array_push($errorMessage, '$key must have a value');
-// 			}
-// 		}
-
 
 
 ?>
@@ -164,5 +124,49 @@ if (!empty($_POST['name'])) {
 
 </form>
 
+
 </body>
 </html>
+<?php
+
+/**
+ * TODO:
+ * 
+ * Display table
+ * Handle $_GET['remove']
+ * Add remove links to table
+ * Handle $_FILE upload (just replace addressbook data)
+ * Allow $_FILE upload to merge w/ existing data
+ * 
+ */
+
+
+
+// write_address_book($filename, $address_book);
+
+
+// $entry = [$name, $streetaddress, $city, $state, $zip];
+
+// $error = false;
+// $message = '';
+
+// if (!empty($_POST['name'])) {
+// 		$entry = [];
+// 		$entry[$name] = $_POST {'name'};
+// 		$entry[$streetaddress] = $_POST {'streetaddress'};
+// 		$entry[$city] = $_POST {'city'};
+// 		$entry[$state] = $_POST {'state'};
+// 		$entry[$zip] = $_POST {'zip'};
+// 		$entry[$phone] = $_POST {'phone'};
+
+// 		foreach ($entry as $key => $value) {
+// 			if ($empty($value)) {
+// 				array_push($errorMessage, '$key must have a value');
+// 			}
+// 		}
+
+// $address_book = [
+//     ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
+//     ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
+//     ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
+// ];
