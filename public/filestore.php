@@ -5,14 +5,11 @@ class Filestore {
     public $filename = '';
 
     function __construct($filename = '') {
-        if(!empty($this->filename)) {
+        if(!empty($filename)) {
         	$this->filename = $filename;
         }
     }
 
-    /**
-     * Returns array of lines in $this->filename
-     */
     function read_lines()
     {
     	$filesize = filesize($this->filename);
@@ -47,41 +44,25 @@ class Filestore {
     	if ($filesize > 0) {					
 			$contacts = [];
 
-			while (($data = fgetcsv($handle) != FALSE)) {	
+			while (($data = fgetcsv($handle)) !== FALSE) {	
     			array_push($contacts, $data);
 			}
 	
 		}else {
  			$contacts = [];
     	} 
-    
     	fclose($handle);
     	return $contacts;
 
 	}
 
-    public function write_address_book($addresses_array) {
+    public function write_address_book($contacts) {
     	$handle = fopen($this->filename, 'w');
-    	foreach ($addresses_array as $row ) {
+    	foreach ($contacts as $row) {
     		fputcsv($handle, $row);
     	}
     	fclose($handle);
     }
 
-    /**
-     * Reads contents of csv $this->filename, returns an array
-     */
-    // function read_csv()
-    // {
-
-    // }
-
-    // *
-    //  * Writes contents of $array to csv $this->filename
-     
-    // function write_csv($array)
-    // {
-
-    // }
-
+   
 }
