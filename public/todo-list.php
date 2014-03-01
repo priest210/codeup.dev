@@ -4,7 +4,7 @@ require_once('filestore.php');
 
 class TodoList extends Filestore {
 
-}
+}   
 
 // set the filename path variable
 $todo = new TodoList('todo_list.txt');
@@ -16,7 +16,7 @@ $items = $todo->read_lines();
 if (isset($_POST['newitem']) && (!empty($_POST['newitem']))) {
     $item = htmlspecialchars(strip_tags($_POST['newitem']));
     array_push($items, $item);
-    $todo->save_file($items);
+    $todo->write_lines($items);
     header('Location: todo-list.php');  
 }
 
@@ -24,12 +24,12 @@ if (isset($_POST['newitem']) && (!empty($_POST['newitem']))) {
 if (isset($_GET['remove'])) {
     $itemId = $_GET['remove'];
     unset($items[$itemId]);
-    $todo->save_file($items);
+    $todo->write_lines($items);
     header('Location: todo-list.php');   
 }
 
 // if file contains something & has no errors
-if (count($_FILES) > 0 && $_FILES['newitem']['error'] == 0) {
+if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
 
     if ($_FILES['new_upload']['error'] == 0)  {
         $errormessage = 'File upload error. ';
@@ -43,12 +43,12 @@ if (count($_FILES) > 0 && $_FILES['newitem']['error'] == 0) {
     $saved_filename = $upload_dir . $userfilename;
 
     if ($_FILES['new_upload']['type'] == 'text/plain') {
-    move_uploaded_file($_FILES['new_upload']['tmp_name'], $saved_filename);
-    $uploadedItems = read_file($saved_filename);
-    $items = array_merge($items, $uploadedItems);
-    save_file($filename, $items);
-    var_dump($_FILES['new_upload']['type']);
-
+        move_uploaded_file($_FILES['new_upload']['tmp_name'], $saved_filename);
+        $uploaded_file = new TodoList($saved_filename);
+        $uploadedItems = $uploaded_file->read_lines();
+        $items = array_merge($items, $uploadedItems);
+        $todo->write_lines($items);
+        
     } else {
         echo 'ERROR !!!!!! Uploaded file must be a text file ERROR!!!!';
     }
@@ -57,7 +57,7 @@ if (count($_FILES) > 0 && $_FILES['newitem']['error'] == 0) {
 
 // if file has items saved to it.  User can retrieve at this link posted. 
 if (isset($saved_filename)) {
-    echo "<p>You can download your file <a href='/uploads/{$filename}'>here</a>.</p>";
+    echo "<p>You can download your file <a href='/uploads/{$userfilename}'>here</a>.</p>";
 }
 
 
