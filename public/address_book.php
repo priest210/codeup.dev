@@ -5,10 +5,11 @@ require_once('address_data_store.php');
 $addresses = new AddressDataStore('address_list.csv');
 $contacts = $addresses->read();
 
+try {
 
 if (!empty($_POST)) {
 	if (strlen($_POST['name']) > 125 || (empty ($_POST['name']))){
-		throw excepton ('Must have an put that is less thatn 125 characters');
+		throw new Exception ('Must have an put that is less thatn 125 characters');
 	} else {
 			$newitem[] = htmlspecialchars(strip_tags($_POST['name']));
 	}
@@ -42,7 +43,9 @@ if (!empty($_POST)) {
 	$addresses->write($contacts);
 }
 
-
+} catch (Exception $exception) {
+	echo 'Error - Verify you are using proper input parameters & TRY AGAIN!';
+}
 
 
 
