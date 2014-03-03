@@ -12,10 +12,12 @@ $todo = new TodoList('todo_list.txt');
 // calls the real function for file with new todo item add to end of array
 $items = $todo->read();
 
+try {
+
 // if new item is posted this code adds to end of array. Saves file
 if (!empty($_POST)) {
     if (strlen($_POST['newitem']) > 240 || (empty($_POST['newitem']))) {
-        throw new Exception('Must have an put that is less thatn 240 characters');
+        throw new Exception('Must have input that is less thatn 240 characters');
     }
 
     $item = htmlspecialchars(strip_tags($_POST['newitem']));
@@ -36,10 +38,10 @@ if (isset($_GET['remove'])) {
 if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
 
     if ($_FILES['new_upload']['error'] == 0)  {
-        $errormessage = 'File upload error. ';
+        throw new Exception('File upload error. ');
     }
     if ($_FILES['new_upload']['type'] == 'text/plain') {
-        $errormessage = 'File upload type error. ';
+        throw new Exception('File upload type error. ');
     }
  
     $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';   
@@ -54,7 +56,7 @@ if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
         $todo->write($items);
         
     } else {
-        echo 'ERROR !!!!!! Uploaded file must be a text file ERROR!!!!';
+        throw new Exception('ERROR !!!!!! Uploaded file must be a text file ERROR!!!!');
     }
     
 }
@@ -62,6 +64,11 @@ if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
 // if file has items saved to it.  User can retrieve at this link posted. 
 if (isset($saved_filename)) {
     echo "<p>You can download your file <a href='/uploads/{$userfilename}'>here</a>.</p>";
+}
+
+
+} catch (Exception $exception) {
+    echo 'Error found - check input parameters and TRY AGAIN!';
 }
 
 
