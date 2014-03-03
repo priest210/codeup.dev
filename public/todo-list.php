@@ -10,13 +10,17 @@ class TodoList extends Filestore {
 $todo = new TodoList('todo_list.txt');
 
 // calls the real function for file with new todo item add to end of array
-$items = $todo->read_lines();
+$items = $todo->read();
 
 // if new item is posted this code adds to end of array. Saves file
-if (isset($_POST['newitem']) && (!empty($_POST['newitem']))) {
+if (!empty($_POST)) {
+    if (strlen($_POST['newitem']) > 240 || (empty($_POST['newitem']))) {
+        throw new Exception('Must have an put that is less thatn 240 characters');
+    }
+
     $item = htmlspecialchars(strip_tags($_POST['newitem']));
     array_push($items, $item);
-    $todo->write_lines($items);
+    $todo->write($items);
     header('Location: todo-list.php');  
 }
 
@@ -24,7 +28,7 @@ if (isset($_POST['newitem']) && (!empty($_POST['newitem']))) {
 if (isset($_GET['remove'])) {
     $itemId = $_GET['remove'];
     unset($items[$itemId]);
-    $todo->write_lines($items);
+    $todo->write($items);
     header('Location: todo-list.php');   
 }
 
@@ -45,9 +49,9 @@ if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
     if ($_FILES['new_upload']['type'] == 'text/plain') {
         move_uploaded_file($_FILES['new_upload']['tmp_name'], $saved_filename);
         $uploaded_file = new TodoList($saved_filename);
-        $uploadedItems = $uploaded_file->read_lines();
+        $uploadedItems = $uploaded_file->read();
         $items = array_merge($items, $uploadedItems);
-        $todo->write_lines($items);
+        $todo->write($items);
         
     } else {
         echo 'ERROR !!!!!! Uploaded file must be a text file ERROR!!!!';
