@@ -3,51 +3,47 @@
 require_once('address_data_store.php');
 
 $addresses = new AddressDataStore('address_list.csv');
-$contacts = $addresses->read_address_book();
-$addresses->write_address_book($contacts);
-
-$errorMessage = [];
-
-var_dump($contacts);
+$contacts = $addresses->read();
 
 
-if (!empty($_POST['name'])) {
-	$newitem[] = htmlspecialchars(strip_tags($_POST['name']));
-}	else {
-		array_push($errorMessage, 'Name must have a value.');
+if (!empty($_POST)) {
+	if (strlen($_POST['name']) > 125 || (empty ($_POST['name']))){
+		throw excepton ('Must have an put that is less thatn 125 characters');
+	} else {
+			$newitem[] = htmlspecialchars(strip_tags($_POST['name']));
 	}
 
-if (!empty($_POST['streetaddress'])) {
-	$newitem[] = htmlspecialchars(strip_tags($_POST['streetaddress']));
-}	else {
-		array_push($errorMessage, 'Street address must have a value.');
+	if (!empty($_POST['streetaddress'])) {
+		$newitem[] = htmlspecialchars(strip_tags($_POST['streetaddress']));
+	}	else {
+			$newitem[] = htmlspecialchars(strip_tags($_POST['streetaddress']));
 	}
 
-if (!empty($_POST['city'])) {
-	$newitem[] = htmlspecialchars(strip_tags($_POST['city']));
-}	else {
-		array_push($errorMessage, 'City must have a value.');
+	if (!empty($_POST['city'])) {
+		$newitem[] = htmlspecialchars(strip_tags($_POST['city']));
+	}	else {
+		$newitem[] = htmlspecialchars(strip_tags($_POST['city']));
 	}
 
-if (!empty($_POST['state'])) {
-	$newitem[] = htmlspecialchars(strip_tags($_POST['state']));
-}	else {
-		array_push($errorMessage, 'State must have a value.');
+	if (!empty($_POST['state'])) {
+		$newitem[] = htmlspecialchars(strip_tags($_POST['state']));
+	}	else {
+		$newitem[] = htmlspecialchars(strip_tags($_POST['state']));
 	}
 
-if (!empty($_POST['zip'])) {
-	$newitem[] = htmlspecialchars(strip_tags($_POST['zip']));
-}	else {
-		array_push($errorMessage, 'Zip must have a value');
+	if (!empty($_POST['zip'])) {
+		$newitem[] = htmlspecialchars(strip_tags($_POST['zip']));
+	}	else {
+		$newitem[] = htmlspecialchars(strip_tags($_POST['zip']));
 	}
 
-// Need to take each $newitem from the if statements and push on the end of array
+	array_push($contacts, $newitem);
 
-array_push($contacts, $newitem);
-$addresses->write_address_book($contacts);
+	$addresses->write($contacts);
+}
 
-	// push into $address_book
-	// save CSV
+
+
 
 
 ?>
@@ -141,9 +137,7 @@ $addresses->write_address_book($contacts);
  */
 
 
-
 // write_address_book($filename, $address_book);
-
 
 // $entry = [$name, $streetaddress, $city, $state, $zip];
 
@@ -165,8 +159,3 @@ $addresses->write_address_book($contacts);
 // 			}
 // 		}
 
-// $address_book = [
-//     ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
-//     ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
-//     ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
-// ];
