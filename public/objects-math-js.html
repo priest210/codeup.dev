@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script>
+				// create a circle object
+		var circle = {
+		    
+		    radius: 3,
+		    
+		    getArea: function () {
+		        // todo: finish this method
+
+		        return Math.PI * Math.pow(this.radius, 2);
+		    },
+		    
+
+		    logInfo: function (round) {
+		        // todo: complete this method. if round is true, round the result to the nearest integer.
+		        if (round) {
+		        	console.log('Area of a circle with radius: ' + this.radius + ', is: ' + Math.round(this.getArea()));
+		        } else {
+
+		        	console.log('Area of a circle with radius: ' + this.radius + ', is: ' +  this.getArea());
+		        }
+		    }
+		};
+
+		// log info about the circle
+		circle.logInfo(false);
+		circle.logInfo(true);
+
+
+		// Change the radius of the circle to 5.
+
+		//use circle.radius because we are outside of class. Otherwise it would have been this.radius if inside. 
+		circle.radius = 5;
+
+		// log info about the circle
+		circle.logInfo(false);
+		circle.logInfo(true);
+
+
+	</script>
+
+</body>
+</html>
