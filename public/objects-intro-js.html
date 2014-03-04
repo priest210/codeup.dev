@@ -7,12 +7,24 @@
 </head>
 <body>
 	<script> 
-	object-intro-js.html
-
+	
 
 	// todo:
 	// Create person object with firstName and lastName properties (set to your first and last name).
-	// var person = todo;
+
+
+	var person = 
+		{
+			firstName : "Ken", 
+			lastName : "Priest"
+		};
+
+
+	person.sayHello = function() {
+			alert('Hello ' + this.firstName + ' ' + this.lastName);
+	};
+
+	person.sayHello();
 
 	// todo:
 	// Add a say hello method to the person object that alerts hello using the firstName and lastName properties.
