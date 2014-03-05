@@ -9,7 +9,7 @@ try {
 
 if (!empty($_POST)) {
 	if (strlen($_POST['name']) > 125 || (empty ($_POST['name']))){
-		throw new Exception ('Must have an put that is less thatn 125 characters');
+		throw new InvalidInputException('Must have an put that is less thatn 125 characters');
 	} else {
 			$newitem[] = htmlspecialchars(strip_tags($_POST['name']));
 	}
@@ -41,12 +41,18 @@ if (!empty($_POST)) {
 	array_push($contacts, $newitem);
 
 	$addresses->write($contacts);
+
+	if (isset($_GET['remove'])) {
+		$itemId = $_GET['remove'];
+		unset($rows[$itemId]);
+		$addresses->write($rows);
+		header('Location: address_book.php');
+	}
 }
 
-} catch (Exception $exception) {
+} catch (InvalidInputException $e) {
 	echo 'Error - Verify you are using proper input parameters & TRY AGAIN!';
 }
-
 
 
 ?>
@@ -62,24 +68,27 @@ if (!empty($_POST)) {
 	<body>
 		
 		
-
-		<!-- <table>
+		<table>
+				<tr>
+					<th>name</th>
+					<th>streetaddress </th>
+					<th>city </th>
+					<th>state </th>
+					<th>zip</th>
+				</tr>	
 			
 		
-			<?// foreach($items as $item): ?>
-            
-			<tr> foreach()
-				<td>name </td>
-				<td>streetaddress </td>
-				<td>city </td>
-		 		<td>state </td>
-				<td>zip </td>
-				<td>phone </td>
-			</tr>
+			<? foreach($contacts as $rows => $row):  ?>
 
-			<?// endforeach; ?>
+				<tr>
+					<? foreach ($row as $entry): ?>
+						<td><?=$entry?></td>
+					<? endforeach; ?>
+					<td><a href="? remove=<?= $rows; ?>">Remove row</a></td>
+				</tr>
+			<?endforeach; ?>
 
-		</table> -->
+		</table>
         
 
        <h1>Add Contact to your Address Book</h1>
@@ -112,11 +121,6 @@ if (!empty($_POST)) {
         <input id="zip" name="zip" type="text" autotfocus = "autofocus"placeholder="Enter zip">
     </p>
 
-     <p>
-        <label for="phone">Add Phone number (111-222-3333):</label>
-        <input id="phone" name="phone" type="text" autotfocus = "autofocus"placeholder="Enter Phone: 111-222-3333">
-    </p>
-
     <p>
         <input type="submit" value="Add contact">
     </p>
@@ -128,37 +132,8 @@ if (!empty($_POST)) {
 </html>
 <?php
 
-/**
- * TODO:
- * 
- * Display table
- * Handle $_GET['remove']
- * Add remove links to table
- * Handle $_FILE upload (just replace addressbook data)
- * Allow $_FILE upload to merge w/ existing data
- * 
- */
 
 
-// write_address_book($filename, $address_book);
 
-// $entry = [$name, $streetaddress, $city, $state, $zip];
 
-// $error = false;
-// $message = '';
-
-// if (!empty($_POST['name'])) {
-// 		$entry = [];
-// 		$entry[$name] = $_POST {'name'};
-// 		$entry[$streetaddress] = $_POST {'streetaddress'};
-// 		$entry[$city] = $_POST {'city'};
-// 		$entry[$state] = $_POST {'state'};
-// 		$entry[$zip] = $_POST {'zip'};
-// 		$entry[$phone] = $_POST {'phone'};
-
-// 		foreach ($entry as $key => $value) {
-// 			if ($empty($value)) {
-// 				array_push($errorMessage, '$key must have a value');
-// 			}
-// 		}
 
