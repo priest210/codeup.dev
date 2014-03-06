@@ -17,7 +17,7 @@ try {
 // if new item is posted this code adds to end of array. Saves file
 if (!empty($_POST)) {
     if (strlen($_POST['newitem']) > 240 || (empty($_POST['newitem']))) {
-        throw new Exception('Must have input that is less thatn 240 characters');
+        throw new InvalidInputException('Must have input that is less thatn 240 characters');
     }
 
     $item = htmlspecialchars(strip_tags($_POST['newitem']));
@@ -38,10 +38,10 @@ if (isset($_GET['remove'])) {
 if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
 
     if ($_FILES['new_upload']['error'] == 0)  {
-        throw new Exception('File upload error. ');
+        throw new InvalidInputException('File upload error. ');
     }
     if ($_FILES['new_upload']['type'] == 'text/plain') {
-        throw new Exception('File upload type error. ');
+        throw new InvalidInputException('File upload type error. ');
     }
  
     $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';   
@@ -56,7 +56,7 @@ if (count($_FILES) > 0 && $_FILES['new_upload']['error'] == 0) {
         $todo->write($items);
         
     } else {
-        throw new Exception('ERROR !!!!!! Uploaded file must be a text file ERROR!!!!');
+        throw new InvalidInputException('ERROR !!!!!! Uploaded file must be a text file ERROR!!!!');
     }
     
 }
@@ -67,7 +67,7 @@ if (isset($saved_filename)) {
 }
 
 
-} catch (Exception $exception) {
+} catch (InvalidInputException $e) {
     echo 'Error found - check input parameters and TRY AGAIN!';
 }
 
@@ -78,20 +78,23 @@ if (isset($saved_filename)) {
 <html>
 
 <head>
-		<title>TODO List</title>
+		<title>TODO LIST</title>
+        <link rel="stylesheet" href="/css/todo.css">
+        <link href='http://fonts.googleapis.com/css?family=Geostar|Monoton|Montserrat+Subrayada|Faster+One' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Nosifer|Geostar|Monoton|Montserrat+Subrayada|Faster+One' rel='stylesheet' type='text/css'>E8932B
 </head>
 	
-	<body>
+	<body class="body">
         
-     <h1>TODO List</h1>
+     <h1 class="primary-header">TODO List</h1>
 
         <ul>
         	<? foreach ($items as $key => $value): ?>
-            <li><?= $value; ?> <a href="?remove=<?=$key;?>">Remove</a></li>
+            <li class="list"><?= $value; ?> <a id="remove"href="?remove=<?=$key;?>"> - Remove</a></li>
             <? endforeach; ?>
         </ul>
 
-       <h1>Add to your TODO list</h1>
+       <h1 class="sub-heading">Add to your TODO list</h1>
 
 <form method="POST" action="todo-list.php">
     <p>
@@ -106,7 +109,7 @@ if (isset($saved_filename)) {
 </form>
 
 
-<h1>Upload File</h1>
+<h1 class="sub-heading">Upload File</h1>
 
 <form method="POST" enctype="multipart/form-data">
     
@@ -115,7 +118,7 @@ if (isset($saved_filename)) {
         <input type="file" id="new_upload" name="new_upload" placeholder="Browse to file">
     </p>
     <p>
-        <input type="submit" value="Upload">
+        <input type="submit" id="button" value="Push Upload">
 
     </p>
 
