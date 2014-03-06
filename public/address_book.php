@@ -42,17 +42,20 @@ if (!empty($_POST)) {
 
 	$addresses->write($contacts);
 
-	if (isset($_GET['remove'])) {
-		$itemId = $_GET['remove'];
-		unset($rows[$itemId]);
-		$addresses->write($rows);
-		header('Location: address_book.php');
-	}
+
+	
 }
 
 } catch (InvalidInputException $e) {
 	echo 'Error - Verify you are using proper input parameters & TRY AGAIN!';
-}
+  }
+
+	if (isset($_GET['remove'])) {
+		$itemId = $_GET['remove'];
+		unset($contacts[$itemId]);
+		$addresses->write($contacts);
+		header('Location: address_book.php');
+	}
 
 
 ?>
@@ -70,11 +73,11 @@ if (!empty($_POST)) {
 		
 		<table>
 				<tr>
-					<th>name</th>
-					<th>streetaddress </th>
-					<th>city </th>
-					<th>state </th>
-					<th>zip</th>
+					<th>Name</th>
+					<th>Street Address</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Zip</th>
 				</tr>	
 			
 		
@@ -84,7 +87,7 @@ if (!empty($_POST)) {
 					<? foreach ($row as $entry): ?>
 						<td><?=$entry?></td>
 					<? endforeach; ?>
-					<td><a href="? remove=<?= $rows; ?>">Remove row</a></td>
+					<td><a href="?remove=<?=$rows;?>">Remove</a></td>
 				</tr>
 			<?endforeach; ?>
 
