@@ -81,7 +81,7 @@ if (isset($saved_filename)) {
 		<title>TODO LIST</title>
         <link rel="stylesheet" href="/css/todo.css">
         <link href='http://fonts.googleapis.com/css?family=Geostar|Monoton|Montserrat+Subrayada|Faster+One' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Nosifer|Geostar|Monoton|Montserrat+Subrayada|Faster+One' rel='stylesheet' type='text/css'>E8932B
+        <link href='http://fonts.googleapis.com/css?family=Nosifer|Geostar|Monoton|Montserrat+Subrayada|Faster+One' rel='stylesheet' type='text/css'>
 </head>
 	
 	<body class="body">
@@ -118,7 +118,7 @@ if (isset($saved_filename)) {
         <input type="file" id="new_upload" name="new_upload" placeholder="Browse to file">
     </p>
     <p>
-        <input type="submit" id="button" value="Push Upload">
+        <input type="submit" id="upload" value="Push Upload">
 
     </p>
 
