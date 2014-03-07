@@ -1,0 +1,59 @@
+
+
+
+.box {
+	color: #000;
+	font-weight: bold;
+	font-family: serif;
+	width: 150px;
+	height: 50px;
+	border: solid 3px #000;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: #000;
+}
+
+#header {
+	color: orange;
+	background-color: gray;
+	text-align: center;
+	border: solid 5px black;
+	
+}
+
+#body {
+	background-color: #49afc2;
+	border: solid 20px black;
+	
+}
+
+#red {
+	margin-left: 2px;
+	background-color: red;
+}
+
+#orange {
+	margin-left: 30px;
+	background-color: orange;
+}
+
+#yellow {
+	margin-left: 60px;
+	background-color: yellow;
+}	
+
+#green {
+	margin-left: 90px;
+	background-color: green;
+}
+
+#blue {
+	margin-left: 120px;
+	background-color: blue;
+}
+
+#purple {
+	margin-left: 150px;
+	background-color: purple;
+}
