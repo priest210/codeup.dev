@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <title>Ken's Resume</title>
+    
 
     <!-- Bootstrap -->
     <link href="css/superhero-bootstrap.css" rel="stylesheet">
@@ -23,6 +24,25 @@
           font-size: 40px;
       }
 
+      #skills-table {
+        font-size: 20px;
+        text-align: center; 
+      }
+
+      .panel-title {
+        font-size: 24px;
+      }
+      .list-group-item {
+        font-size: 18px;
+      }
+
+      #experience-header {
+        background-color: #5cb85c;
+      }
+      #experience-background {
+        background-color: #2b3e50;
+      }
+
     </style>
 
   </head>
@@ -35,18 +55,18 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Home</a>
+    
   </div>
-  <div class="navbar-collapse collapse navbar-inverse-collapse">
+  <div class="navbar-collapse collapse navbar-inverse-collapse" role="navigation">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#profile">Profile</a></li>
+      <li><a href="#profile">Profile</a></li>
       <li><a href="#skills">Skills</a></li>
-       <li><a href="#education">Education</a></li>
-        <li><a href="#experience">Experience</a></li>
-         <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#contact">Contact me</a></li>
-        </li>
-      </ul>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact me</a></li>
+      </li>
+    </ul>
     </div>
   </div>
 <!-- ****** END NAV BAR********** -->
@@ -58,83 +78,161 @@
     </p>
 
     <p>Rest assured no shortcuts were taken and no animals were harmed during the development process.</p>
-    <p><a href="http://www.linkedin.com/in/kenpriest/" class="btn btn-primary btn-lg">Learn more about me!</a></p>
+    <p><a href="http://www.linkedin.com/in/kenpriest/" class="btn btn-primary btn-lg" target="_blank">Learn more about me!</a></p>
 </div>
+
+<!-- **************** Main Body ************** -->
 
 <div class="panel panel-danger">
   <div class="panel-heading">
-    <h3 class="panel-title"><a id="profile">Profile</a></h3>
+    <h3 class="panel-title" id="profile">Profile</h3>
   </div>
   <div class="panel-body">
-    Panel content
+    <div class="well well-lg">Here is where I will add an objective/summary statement.</div>
   </div>
 </div>
+
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title"><a id="skills">Skills</a></h3>
+    <h3 class="panel-title" id="skills">Skills</h3>
   </div>
   <div class="panel-body">
-    Test Skill
-  </div>
-
-
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title"><a id="education">Education</a></h3>
+    List applicable skills here: IT, Project management, OS, application....
+    <div>
+    <table class="table" id="skills-table">
+          <tr>
+              <td>Linux</td>
+              <td>HTML</td> 
+              <td>Bootstrap</td>
+              <td>Project Management</td>
+              <td>u</td>
+          </tr>
+          <tr>
+              <td>Apache</td>
+              <td>CSS</td>
+              <td>b</td>
+              <td>2</td> 
+              <td>v</td>
+          </tr>
+          <tr>
+              <td>MySQL</td>
+              <td>Laravel</td>
+              <td>c</td>
+              <td>3</td>
+              <td>x</td>
+          </tr>
+          <tr>
+              <td>PHP</td>
+              <td>GIT</td> 
+              <td>d</td>
+              <td>4</td>
+              <td>y</td>
+          </tr>
+          <tr>
+              <td>Javascript</td>
+              <td>GitHub</td>
+              <td>e</td>
+              <td>5</td> 
+              <td>z</td>
+          </tr>
+    </table>  
     </div>
-    
+</div>
 
-      <div class="list-group">
-      <a href="http://www.codeup.com" class="list-group-item">
-      <h4 class="list-group-item-heading"> 
-      
-
-      <i class="fa fa-laptop  "></i> Codeup, Computer Programming Bootcamp
-
-      </h4><p class="list-group-item-text">San Antonio, Texas
-      </a>
-      
-
-
-      <a href="http://www.uiw.edu/mha/" class="list-group-item">
-      <h4 class="list-group-item-heading"> 
-      <i class="fa fa-pencil  "></i> Master of Health Administration - (2012), GPA 3.93</h4>
-      <p class="list-group-item-text">
-      University of the Incarnate Word, San Antonio, Texas
-      </a>
-      
-
-
-
-      <div class="panel-body">
-        <i class="fa fa-pencil  "></i> TEST Master of Health Administration - (2012), GPA 3.93
-      </div>
-      
-
-      <a href="http://www.sa.wbu.edu/" class="list-group-item">
-      <h4 class="list-group-item-heading"><i class="fa fa-pencil  "></i> Bachelor, Business Administration - (2010), GPA 3.4</h4>
-      <p class="list-group-item-text">Wayland Baptist University, San Antonio, Texas</p>
-      </a>
-    </div>
   </div>
 </div>
 
 <div class="panel panel-warning">
-  <div class="panel-heading">
-    <h3 class="panel-title"><a id="experience">Experience</a></h3>
+    <div class="panel-heading">
+    <h3 class="panel-title" id="education">Education</h3>
+  </div>
+  <div class="panel-title">
+    <a href="http://www.codeup.com" class="list-group-item">
+    <i class="fa fa-laptop "></i> Codeup, Computer Programming Bootcamp
+      </a>
+  </div>
+  <div class="panel-body"> 
+    San Antonio, Texas
+  </div>
+
+  <div class="panel-title">
+    <a href="http://www.uiw.edu/mha" class="list-group-item">
+    <i class="fa fa-pencil "></i> Master of Health Administration, GPA 3.93
+      </a>
   </div>
   <div class="panel-body">
-    Panel content
+  University of the Incarnate Word, San Antonio, TX 
+  </div>
+  <div class="panel-title">
+    <a href="http://www.wbu.edu" class="list-group-item">
+    <i class="fa fa-pencil "></i> Bachelor, Business Administration, GPA 3.4
+      </a>
+  </div>
+  <div class="panel-body"> 
+    Wayland Baptist University, San Antonio, TX
+</div>
+
+</div>
+<div class="panel panel-warning">
+  <div id="experience-header" class="panel-heading">
+    <h3 id="experience-header" class="panel-title" id="experience">Experience</h3>
+  </div>
+  <div class="panel-body">
+ 
+    <ul class="list-group">
+      <h3>E&amp;P Wireline(Schlumberger)</h3>
+      <h4>Lead/Arming Operator</h4>
+          
+        <li class="list-group-item">Responsible for entire scope of   wireleine operations at wellsite</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+    </ul>
+
+    <ul class="list-group">
+      <h3>Graduate Student (Full-time)</h3>
+      <h4>Master of Health Administration</h4>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+    </ul>
+
+    <ul class="list-group">
+      <h3>Watermark Asset Management LLC.</h3>
+      <h4>Owner/Project Manager</h4>  
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+    </ul>
+
+    <ul class="list-group">
+      <h3>Paradise Farms LLC.</h3>
+      <h4>Operations &amp; Project Manager</h4> 
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+    </ul>
+
+    <ul class="list-group">
+      <h3>United States Air Force</h3>
+      <h4>Law Office Manager/Court Administrator/Paralegal</h4> 
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+        <li class="list-group-item">Key responsbilbity</li>
+    </ul>
+      
+
+
+
+
   </div>
 </div>
 
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title"><a id="portfolio">Portfolio</a></h3>
-  </div>
-  <div class="panel-body">
-    Panel content
-  </div>
+  
 </div>
 
 
