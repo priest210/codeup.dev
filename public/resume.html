@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <title>Ken's Resume</title>
-    
 
     <!-- Bootstrap -->
     <link href="css/superhero-bootstrap.css" rel="stylesheet">
@@ -22,6 +21,10 @@
           height: 150px;
           padding-top: 0;
           font-size: 40px;
+      }
+
+      .jumbotron {
+        margin-bottom: 23px;
       }
 
       #skills-table {
@@ -42,13 +45,37 @@
       #experience-background {
         background-color: #2b3e50;
       }
+      
+      .link-bar {
+        height: 100px;
+        background-color: #000;
+        padding: 5px; 
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      #ex-icons-left {
+        margin-left: 500px;
+      }
+
+      #ex-icons-center {
+        margin-left: 600px;
+        float: left;
+      }
+
+      #ex-icons-right {
+        margin-left: 700px;
+      }
+
 
     </style>
 
   </head>
   <!-- ******NAV BAR********** -->
   <body>
-    <div class="navbar navbar-inverse">
+
+
+  <div class="navbar navbar-inverse">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
       <span class="icon-bar"></span>
@@ -69,9 +96,11 @@
     </ul>
     </div>
   </div>
+
+
 <!-- ****** END NAV BAR********** -->
 <div class="jumbotron">
-    <h1>Ken Priest</h1>
+    <h1>Ken Priest </h1>
     <p>Welcome to my online resum&eacute;.
     </p>  
     <p>This page was created using the finest HTML, CSS  and Javascript craftsmanship.  
@@ -81,8 +110,12 @@
     <p><a href="http://www.linkedin.com/in/kenpriest/" class="btn btn-primary btn-lg" target="_blank">Learn more about me!</a></p>
 </div>
 
+
+
 <!-- **************** Main Body ************** -->
 
+
+<div>
 <div class="panel panel-danger">
   <div class="panel-heading">
     <h3 class="panel-title" id="profile">Profile</h3>
@@ -137,17 +170,16 @@
           </tr>
     </table>  
     </div>
-</div>
-
   </div>
+</div>
 </div>
 
 <div class="panel panel-warning">
     <div class="panel-heading">
     <h3 class="panel-title" id="education">Education</h3>
   </div>
-  <div class="panel-title">
-    <a href="http://www.codeup.com" class="list-group-item">
+  <div class="panel-title"> 
+    <a href="http://www.codeup.com" target="_blank"class="list-group-item">
     <i class="fa fa-laptop "></i> Codeup, Computer Programming Bootcamp
       </a>
   </div>
@@ -156,7 +188,7 @@
   </div>
 
   <div class="panel-title">
-    <a href="http://www.uiw.edu/mha" class="list-group-item">
+    <a href="http://www.uiw.edu/mha" target="_blank" class="list-group-item" >
     <i class="fa fa-pencil "></i> Master of Health Administration, GPA 3.93
       </a>
   </div>
@@ -164,7 +196,7 @@
   University of the Incarnate Word, San Antonio, TX 
   </div>
   <div class="panel-title">
-    <a href="http://www.wbu.edu" class="list-group-item">
+    <a href="http://www.wbu.edu" target="_blank" class="list-group-item">
     <i class="fa fa-pencil "></i> Bachelor, Business Administration, GPA 3.4
       </a>
   </div>
@@ -174,8 +206,8 @@
 
 </div>
 <div class="panel panel-warning">
-  <div id="experience-header" class="panel-heading">
-    <h3 id="experience-header" class="panel-title" id="experience">Experience</h3>
+  <div id="experience-header" class="panel-heading" id="experience-header">
+    <h3 class="panel-title" id="experience">Experience</h3>
   </div>
   <div class="panel-body">
  
@@ -225,15 +257,11 @@
         <li class="list-group-item">Key responsbilbity</li>
     </ul>
       
-
-
-
-
   </div>
 </div>
 
   
-</div>
+
 
 
 
