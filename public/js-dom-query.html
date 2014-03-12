@@ -3,6 +3,10 @@
     <title>DOM: Query and Modify</title>
 </head>
 <body>
+    <button id="btn1">Javascript is Cool</button>
+    <button id="btn2">Blue Subheading</button>
+    <button id="btn3">List items</button>
+    <button id="btn4">Mission Accomplished</button>
 
     <h1 id="main-header">Hello World!</h1>
     <ul>
@@ -18,32 +22,44 @@
     <script>
 
 
-        var mainHeader = document.getElementById('main-header');
-        console.log(mainHeader);
-
-        mainHeader.innerHTML = "JavaScript is Cool";
-
-
-        var subHeader = document.getElementById('sub-header');
-        console.log(subHeader);
-
-        subHeader.style['color'] = 'blue';
-
-       
-        var listItems = document.getElementsByTagName('li');
-
-        for (var i = 0; i < listItems.length; i++) {
-
-            if (listItems[i].attributes['data-dbid'].value == "1") {
-                listItems[i].style['color'] = 'blue';
-            }   
-
-            else if (i % 2 == 0) {
-                    listItems[i].style['color'] = 'grey';
-                }
+        // Added button, created function and added event listener
+        
+        var headerChange = function(){ 
+            mainHeader.innerHTML = "JavaScript is Cool";  
         };
 
+        var mainHeader = document.getElementById('main-header');
         
+        document.getElementById('btn1').addEventListener('click', headerChange, false);
+
+        
+        // Added button, created function and added event listener
+        
+        var subHeaderChange = function(){
+            subHeader.style['color'] = 'blue';
+        };
+
+        var subHeader = document.getElementById('sub-header');
+
+        document.getElementById('btn2').addEventListener('click', subHeaderChange, false);
+
+
+        var listFunction = function(){
+            var listItems = document.getElementsByTagName('li');
+                for (var i = 0; i < listItems.length; i++) {
+
+                    if (listItems[i].attributes['data-dbid'].value == "1") {
+                    listItems[i].style['color'] = 'blue';
+                    }   
+                        else if (i % 2 == 0) {
+                        listItems[i].style['color'] = 'grey';
+                        }
+                };
+        };
+
+        document.getElementById('btn3').addEventListener('click', listFunction, false);
+
+
         var subParagraphs = document.getElementsByClassName('sub-paragraph');
 
         subParagraphs[0].innerHTML = "Mission Accomplished";
