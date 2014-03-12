@@ -78,10 +78,15 @@ if (isset($saved_filename)) {
 <html>
 
 <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<title>TODO LIST</title>
-        <link rel="stylesheet" href="/css/todo.css">
-        <link href='http://fonts.googleapis.com/css?family=Geostar|Monoton|Montserrat+Subrayada|Faster+One' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Nosifer|Geostar|Monoton|Montserrat+Subrayada|Faster+One' rel='stylesheet' type='text/css'>
+
+        <link href="css/spacelab-bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/spacelab-bootstrap.css">
+
 </head>
 	
 	<body class="body">
@@ -125,9 +130,11 @@ if (isset($saved_filename)) {
 </form>
 
 <?php 
-
-
-
  ?>
+
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
