@@ -1,0 +1,52 @@
+
+.well {
+	font-size: 20px;
+}
+
+.list {
+	font-size: 26px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+	line-height: 50px;
+	height: 60px;
+	padding-top: 0px;
+	font-size: 25px;
+}
+
+#remove {
+	font-size: 24px;
+}
+
+
+
+/*.primary-header {
+	color: black;
+	text-decoration: underline;
+	text-align: center;
+	font-family: 'Faster One', cursive;
+	font-size: 4em;
+}
+
+.body {
+	background-color: #49afc2;
+	text-align: left;
+
+}
+
+.sub-heading {
+	color: #10050a;
+	font-style: italic;
+	font-family: 'Montserrat Subrayada', sans-serif;
+	font-size: 2em;
+}
+
+#upload {
+	font-size: 0.5em;
+	font-weight: bold;
+	font-family: sans-serif;
+	color: #FFFFFF;
+	background-color: #004B8B;
+	padding: 1em;
+}*/
