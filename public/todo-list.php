@@ -81,53 +81,74 @@ if (isset($saved_filename)) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
 		<title>TODO LIST</title>
-
         <link href="css/spacelab-bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/spacelab-bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/todo.css">
 
 </head>
 	
 	<body class="body">
-        
-     <h1 class="primary-header">TODO List</h1>
 
-        <ul>
-        	<? foreach ($items as $key => $value): ?>
-            <li class="list"><?= $value; ?> <a id="remove"href="?remove=<?=$key;?>"> - Remove</a></li>
-            <? endforeach; ?>
-        </ul>
+    <div class="navbar navbar-inverse">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#add">Add an Item</a>
+        <a class="navbar-brand" href="#upload">Upload a File</a>
+      </div>
+    </div>
 
-       <h1 class="sub-heading">Add to your TODO list</h1>
+    <div class="jumbotron">
+      <h1>My Todo List</h1>
+      <p>The things I need to get done!</p>
+            <ul>
+                <? foreach ($items as $key => $value): ?>
+                <li class="list"><?= $value; ?> <a id="remove"href="?remove=<?=$key;?>"> - Remove</a></li>
+                <? endforeach; ?>
+            </ul>
+    </div>
 
-<form method="POST" action="todo-list.php">
-    <p>
-        <label for="newitem">Add item:</label>
-        <input id="newitem" name="newitem" type="text" autotfocus = "autofocus" placeholder="Enter New TODO Item">
-    </p>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add to Your Todo list</h3>
+      </div>
+    </div>
 
-    <p>
-        <input type="submit" value="Add item">
-    </p>
+    <div class="well">  
+        <form method="POST" action="todo-list.php">
+            <p>
+                <label for="newitem" id="add">Add item:</label>
+                <input id="newitem" name="newitem" type="text" autotfocus = "autofocus" placeholder="Enter a Todo Item Here">
+            </p>
 
-</form>
+            <p>
+                <input type="submit" value="Add item">
+            </p>
+        </form>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title" id="upload">Upload a File</h3>
+      </div>
+    </div>
 
 
-<h1 class="sub-heading">Upload File</h1>
-
-<form method="POST" enctype="multipart/form-data">
-    
-    <p>
-        <label for="new_upload">File to upload: </label>
-        <input type="file" id="new_upload" name="new_upload" placeholder="Browse to file">
-    </p>
-    <p>
-        <input type="submit" id="upload" value="Push Upload">
-
-    </p>
-
-</form>
+    <div class="well">
+        <form method="POST" enctype="multipart/form-data">
+            <p>
+                <label for="new_upload">File to upload: </label>
+                <input type="file" id="new_upload" name="new_upload" placeholder="Browse to file">
+            </p>
+            <p>
+                <input type="submit" id="upload" value="Push to Upload">
+            </p>
+        </form>
+    </div>
 
 <?php 
  ?>
