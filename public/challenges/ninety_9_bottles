@@ -1,0 +1,22 @@
+<?php
+
+
+// loop in descending order from 99
+
+$beer = 99;
+
+do {
+	echo "$beer bottles of beer on the wall $beer bottles of beer!" . PHP_EOL;
+	$beer --;
+	echo "Take one down, pass it around, $beer bottles of beer on the wall." . PHP_EOL;
+
+	} while ($beer >= 1);
+
+if ($beer == 0) {
+	echo "We're all out of beer! Go buy some more!" . PHP_EOL;
+}
+
+
+
+
+
