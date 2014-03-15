@@ -11,6 +11,13 @@
 
 // The user will enter the amount of money in US dollars, 
 
+$dollar = 1.00;
+$euro = ($dollar * .73);
+$pound = ($dollar * .60);
+$peso = ($dollar / 13);
+
+echo $peso;
+
 // then he/she will be prompted to choose the currency they want to covert it to in the following way.
 
 // "Enter the amount that you want want to convert: $"
@@ -45,7 +52,7 @@
 		  <div class="col-md-4">
 		  	<div class="input-group">
 			  <span class="input-group-addon">$</span>
-			  <input type="text" class="form-control">
+			  <input method="GET" action="todo-list.php" for="amount" id="convert" type="text" class="form-control">
 			  <span class="input-group-addon">.00</span>
 			</div>
 		  </div>
@@ -56,9 +63,9 @@
 			    Currency Type <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
-			    <li><a href="id=">Euros</a></li>
-			    <li><a href="id=">British Pounds</a></li>
-			    <li><a href="id=">Pesos</a></li>
+			    <li><a href="#euro">Euros</a></li>
+			    <li><a href="#pound">British Pounds</a></li>
+			    <li><a href="#peso">Pesos</a></li>
 			  </ul>
 			</div>
 		  </div>	
@@ -67,9 +74,8 @@
  	 <div class="row">
   		<div class="col-md-4">
 	  	<h3>Converted Amount</h3>
-		 <div class="input-group">
-		  <input type="text" class="form-control">
-		  <span class="input-group-addon">.00</span>
+		  <h4><span class="text-success">converted amount will print here</span></h4>
+		  
 		</div>
 		</div>
 	</div>
