@@ -1,20 +1,65 @@
 <html>
 <head>
-	<title>Whack-A-Mole</title>
+	<title>Whack-A-Squatch</title>
 <script src="/js/jquery.js"></script>
+<link rel="stylesheet" href="/css/whack.css">	
+
 <script type="text/javascript">
-	$(document).ready(function(){
-			$('#mole').slideUp(3000);
-			$('#troll1').slideUp(4000);
-	})
+		 $(document)(function(){
+			$('.board').on(click(function() {
+				$('img').hide();
+			});
+	 });
 
 </script>
 
 
 </head>
-<body>
-	<p><img  src="/img/moleGlasses.jpg" id='mole' alt"mole"></p>
-	<p><img  src="/img/troll1.jpeg" id='troll1' alt"troll"></p>
+<body id='body'>
+	
+	<header id='header'>Take your turn at Whack-A-Squatch!</header>
+	
+	<div class='board'>
+		
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+			
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+		
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+
+
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+
+
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+
+	
+	</div>
 
 </body>
 </html>
