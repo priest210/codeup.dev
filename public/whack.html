@@ -5,11 +5,29 @@
 <link rel="stylesheet" href="/css/whack.css">	
 
 <script type="text/javascript">
-		 $(document)(function(){
-			$('.board').on(click(function() {
+		$(document).ready(function(){
+			$('img').hide();
+		});
+
+		// make individual image randomly appear
+
+		var play = function() {
+			var hole = $('.hole');
+			var rand = Math.floor(Math.random() * hole.length);
+
+			$('.hole').children().fadeOut();
+			$(hole[rand]).children().fadeIn();
+		};
+
+		var popInt = setInterval(play, 4000);
+		
+
+
+
+		$('.hole').click(function() {
 				$('img').hide();
-			});
-	 });
+		});
+
 
 </script>
 
@@ -44,12 +62,6 @@
 			<img src="/img/bigfoot1.jpeg">
 		</div>
 
-
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
-
-
 		<div class='hole'>
 			<img src="/img/bigfoot1.jpeg">
 		</div>
@@ -58,7 +70,10 @@
 			<img src="/img/bigfoot1.jpeg">
 		</div>
 
-	
+		<div class='hole'>
+			<img src="/img/bigfoot1.jpeg">
+		</div>
+
 	</div>
 
 </body>
