@@ -5,76 +5,129 @@
 <link rel="stylesheet" href="/css/whack.css">	
 
 <script type="text/javascript">
-		$(document).ready(function(){
-			$('img').hide();
-		});
-
-		// make individual image randomly appear
-
-		var play = function() {
-			var hole = $('.hole');
-			var rand = Math.floor(Math.random() * hole.length);
-
-			$('.hole').children().fadeOut();
-			$(hole[rand]).children().fadeIn();
-		};
-
-		var popInt = setInterval(play, 4000);
 		
+		$(document).ready(function(){
 
+			// Score counter
+			var score = 0;
+			var popUpInt;
+			var timer = 15;
+			var time = null;
+			var gameOver = 'Game Over!';
+	
 
+			$('img').hide();
 
-		$('.hole').click(function() {
+			// make individual image randomly appear
+			var play = function() {
+				var hole = $('.hole');
+				var rand = Math.floor(Math.random() * hole.length);
+				$('.hole').children().fadeOut();
+				$(hole[rand]).children().fadeIn();
+			};
+
+			popUpInt = setInterval(play, 2000);
+			
+			// Hide squatch when he is clicked and increment score by 1.
+			$('img').click(function() {
+				$(this).hide();
+				score++;
+				$('#score').html(score);
+			});
+
+			// Stop game when stop button is clicked
+		
+			$('#stop').click(function() {
 				$('img').hide();
-		});
+				clearInterval(popUpInt);
+			});
 
+			// Start game when start button is clicked
+			$('#newGame').click(function() {
+				popUpInt = setInterval(play, 2000);
+				score = 0;
+				timer = 15;
+				$('#score').html(score);
+				$('#timer').html(timer);
+				clearInterval(time);
+
+				time = setInterval(function() {
+				timer--;
+				$('#timer').html(timer);
+				console.log(timer);
+				if (timer <= 0) {
+					clearInterval(popUpInt);
+					clearInterval(time);
+					
+				};
+				}, 1000);
+
+			});
+
+		});
 
 </script>
 
 
 </head>
 <body id='body'>
+
+		<header id='header'>Take your turn at Whack-A-Squatch!</header>
 	
-	<header id='header'>Take your turn at Whack-A-Squatch!</header>
-	
-	<div class='board'>
-		
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
+		<div class="btn-group">
+		  <button class="btn btn-default btn-lg" id='newGame' type="button">
+		    New Game <span class="caret"></span>
+		  </button>
 		</div>
+
+		<div class="btn-group">
+		  <button class="btn btn-default btn-lg" id='stop' type="button">
+		    Stop <span class="caret"></span>
+		  </button>
+		</div>
+
+		<div id="score">0</div>
+
+		<div id='timer'>15</div>
+
+
+		<div class='board'>
 			
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
+				
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
 
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
-		
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
+			
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
 
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
 
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
 
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
 
-		<div class='hole'>
-			<img src="/img/bigfoot1.jpeg">
-		</div>
+			<div class='hole'>
+				<img src="/img/bigfoot1.jpeg"/>
+			</div>
 
 	</div>
-
 </body>
 </html>
