@@ -35,7 +35,7 @@
 				$('#score').html(score);
 			});
 
-			// Stop game when stop button is clicked
+			// Stop game when stop button is clicked(hides Squatches & clears uncover interval)
 		
 			$('#stop').click(function() {
 				$('img').hide();
@@ -47,18 +47,19 @@
 				popUpInt = setInterval(play, 2000);
 				score = 0;
 				timer = 15;
+				timer--;
 				$('#score').html(score);
 				$('#timer').html(timer);
-				clearInterval(time);
-
+				
+				
+			// Stops countdown timer at 0 & Squatch movement
 				time = setInterval(function() {
 				timer--;
 				$('#timer').html(timer);
 				console.log(timer);
 				if (timer <= 0) {
 					clearInterval(popUpInt);
-					clearInterval(time);
-					
+					clearInterval(time);		
 				};
 				}, 1000);
 
