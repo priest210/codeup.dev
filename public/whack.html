@@ -11,7 +11,7 @@
 			// Score counter
 			var score = 0;
 			var popUpInt;
-			var timer = 15;
+			var timer = 7;
 			var time = null;
 			var gameOver = 'Game Over!';
 	
@@ -26,7 +26,6 @@
 				$(hole[rand]).children().fadeIn();
 			};
 
-			popUpInt = setInterval(play, 2000);
 			
 			// Hide squatch when he is clicked and increment score by 1.
 			$('img').click(function() {
@@ -36,35 +35,35 @@
 			});
 
 			// Stop game when stop button is clicked(hides Squatches & clears uncover interval)
-		
 			$('#stop').click(function() {
-				$('img').hide();
-				clearInterval(popUpInt);
+					$('img').hide();
+					clearInterval(popUpInt);
+					clearInterval(time);
 			});
+			
 
-			// Start game when start button is clicked
+			// Start game when start button is clicked. Image hide/change interval 1 second.
 			$('#newGame').click(function() {
-				popUpInt = setInterval(play, 2000);
+				popUpInt = setInterval(play, 1000);
+				clearInterval(time);
 				score = 0;
-				timer = 15;
-				timer--;
+				timer = 7;
 				$('#score').html(score);
 				$('#timer').html(timer);
-				
-				
-			// Stops countdown timer at 0 & Squatch movement
-				time = setInterval(function() {
 				timer--;
-				$('#timer').html(timer);
-				console.log(timer);
-				if (timer <= 0) {
-					clearInterval(popUpInt);
-					clearInterval(time);		
-				};
+				
+				
+			// Stops countdown timer(1 second) at 0 & Squatch movement
+				time = setInterval(function() {
+					timer--;
+					$('#timer').html(timer);
+					console.log(timer);
+					if (timer <= 0) {
+						clearInterval(popUpInt);
+						clearInterval(time);		
+					};
 				}, 1000);
-
-			});
-
+			});	
 		});
 
 </script>
@@ -86,10 +85,11 @@
 		    Stop <span class="caret"></span>
 		  </button>
 		</div>
-
+		<div>Score</div>
 		<div id="score">0</div>
 
-		<div id='timer'>15</div>
+		<div>Time</div>
+		<div id='timer'></div>
 
 
 		<div class='board'>
